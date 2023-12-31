@@ -19,8 +19,26 @@ function App() {
       return "Station Name"
     }
   }
+  const [modal, setModal] = React.useState(false);
+  const [number, setNumber] = React.useState('');
   return (
     <div className="App">
+      {modal&&
+      <>
+        <div className="modal">
+          <div style={{position:'relative'}}>
+            <button onClick={()=>setModal(false)}>X</button>
+            <h2>Login / Signup</h2>
+            <img src="https://www.zoopindia.com/assets/images/loginBg.svg" alt="login signup" />
+          </div>
+          <form>
+            <div style={{display:'flex',alignItems:'center'}}><div>+91</div><input type="text" placeholder="Enter Phone Number" value={number} onChange={(e)=>setNumber(e.target.value)} /></div>
+            <button disabled={number.length!==10} type="submit">GET OTP</button>
+          </form>
+        </div>
+        <div className="shadow" onClick={()=>setModal(false)}></div>
+      </>
+      }
       <header>
         <nav>
           <img
@@ -30,7 +48,7 @@ function App() {
             height={43.6}
             style={{ marginLeft: "8px" }}
           />
-          <button>Login</button>
+          <button onClick={()=>setModal(true)}>Login</button>
         </nav>
       </header>
       <section className="main_body">
